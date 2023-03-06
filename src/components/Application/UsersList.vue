@@ -19,7 +19,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .user-item {
   float: left;
   margin-bottom: 10px;

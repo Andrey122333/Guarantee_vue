@@ -215,7 +215,7 @@
   };
   </script>
   
-  <style lang="scss">
+  <style scoped lang="scss">
   .flex-div {
     display: flex;
   }

@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .modal-description {
   float: left;
   font-size: 13px;

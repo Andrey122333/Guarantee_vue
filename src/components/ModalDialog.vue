@@ -37,7 +37,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
 $create-height: 70px;
 
 .modal-layout {

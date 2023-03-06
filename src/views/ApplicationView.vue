@@ -1,20 +1,20 @@
 <template>
       <div class="modal-dialog">
       <div class="modal-info">
-        <h2 class="modal-name">Название заявки</h2>
-        <div class="modal-info-text">
-          <span class="modal-info-left">создана: 15.09.2022</span>
-          <span class="modal-info-right">г. Москва</span>
-        </div>
-        <div class="modal-contribution"><p class="modal-contribution-text">Взнос: 1100Р</p></div>
-        <div class="tags">
-          <div class="tag">Тег №1</div>
-        </div>
-        <p class="modal-description">Подробное описание заявки. Consectetur adipiscing elit. Suspendisse cursus, lorem et ultricies interdum, ante dolor tincidunt lectus, vel molestie nunc elit vitae nisi. Nam a neque viverra, efficitur elit sit amet, scelerisque purus. Nulla venenatis purus id lacus facilisis, ut dictum risus commodo. Donec et erat interdum, vehicula odio quis, ultricies nulla. Fusce bibendum, nulla viverra posuere iaculis, tortor justo vulputate justo. </p>
+        <details><summary>
+        <h2 class="modal-name">Название заявки</h2> 
+        <InfoText/>
+        <Contribution/>
+      </summary>
+        <TagsList/>
+        <Description/>
+      </details>
       </div>
+
       <div class="modal-users">
       <div class="modal-users-item">
-        <p class="users-name">Участники (12/100):</p>
+        <details><summary>
+        <p class="users-name">Участники (12/100):</p>    </summary>
         <div class="user-item">
           <img class="user-photo"
           src="https://cheboksari.imperiya-pola.ru/img/nophoto.jpg">
@@ -23,6 +23,7 @@
       <span class="user-role">Кандидат на исполнение</span>
      </div>
         </div>
+      </details>
       </div>
     </div>
     <div>
@@ -34,20 +35,38 @@
 </template>
 
 <script>
+import ActionButton from "@/components/ActionButton.vue";
+import InfoText from "@/components/Application/InfoText.vue";
+import Contribution from "@/components/Application/Contribution.vue";
+import TagsList from "@/components/Application/TagsList.vue";
+import Description from "@/components/Application/Description.vue";
+import UsersList from "@/components/Application/UsersList.vue";
 
+export default {
+  name: "HomeView",
+  components: {
+    ActionButton,
+    InfoText,
+    Contribution,
+    TagsList,
+    Description,
+    UsersList,
+  },
+}
 </script>
 
-<style lang="scss">
+<style  scoped  lang="scss">
 $create-height: 70px;
-
-
+.modal-name {
+  display: inline;
+}
 .modal-dialog {
     background: #879ac5;
-    position: fixed;
-    height: calc(90vh - $create-height);
-    width: 90vw;
-    left: 5vw;
-    top: 5vh;
+    // position: fixed;
+    // height: calc(90vh - $create-height);
+    // width: 90vw;
+    // left: 5vw;
+    // top: 5vh;
     border-radius: 20px;
     overflow: auto;
   }
@@ -65,55 +84,6 @@ $create-height: 70px;
       top: 7vh;
       margin: 6px
   }
-  .modal-info-text {
-    width: 100%;
-    float: left;
-  }
-  .modal-info-left {
-    float: left;
-      margin-left: 10vw;
-      font-size: 14px;
-  }
-  .modal-info-right {
-    float: right;
-      margin-right: 10vw;
-      font-size: 14px;
-  }
-  .modal-contribution {
-    float: left;
-      width: 80vw;
-      margin: 10px 5vw;
-      background: #839BC6;
-      height: 40px;
-      border-radius: 20px;
-  }
-  .modal-contribution-text {
-    margin: 12px;
-      font-weight: bold;
-      color: #fff;
-  }
-  .tags {
-    float: left;
-      width: 80vw;
-      max-height: 66px;
-      margin: 0px 5vw;
-  }
-  .tag {
-    float: left;
-      margin: 4px;
-      padding: 5px 10px;
-      background: #D9D9D9;
-      border-radius: 10px;
-      font-size: 13px;
-  }
-  .modal-description {
-    float: left;
-      font-size: 13px;
-      margin: 5px 5vw;
-      text-align: justify;
-      width: 80vw;
-      height: 135px
-  }
   .modal-users-item {
     float: left;
       margin: 5px 5vw;
@@ -122,6 +92,7 @@ $create-height: 70px;
   }
   .users-name {
     color: #fff;
+    display: inline;
   }
   
   .user-item {

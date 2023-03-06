@@ -1,10 +1,19 @@
 <template>
         <div class="footer-div">
-            <button class="button">Присоединиться</button>
+            <button class="button">{{text}}</button>
     </div>
 </template>
 
 <script>
+export default {
+  name: "",
+  props: {
+    text: {
+      type: Text,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

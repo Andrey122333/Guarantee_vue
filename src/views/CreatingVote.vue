@@ -18,17 +18,32 @@
         </div>
     </div>
       <ActionButton></ActionButton>
+
+
+
+      <div v-show="true">
+    <ModalLayout />
+    <ModalDialog :applications="applications"/>
+    <!-- <div class="footer-div">
+      <button class="create">Присоединиться</button>
+    </div> -->
+    <ActionButton />
+  </div>
+
     </div>
+    
   </template>
     
     <script>
   import VueMultiselect from "vue-multiselect";
   import ActionButton from "@/components/ActionButton.vue";
+  import ModalDialog from "@/components/ModalDialog.vue";
+import ModalLayout from "@/components/ModalLayout.vue";
   
   export default {
     name: "SearchView",
     components: { 
-      VueMultiselect, ActionButton 
+      VueMultiselect, ActionButton, ModalDialog, ModalLayout
     },
     data() {
       return {

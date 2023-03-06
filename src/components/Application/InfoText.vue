@@ -11,7 +11,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped lang="scss">
 .modal-info-text {
   width: 100%;
   float: left;
