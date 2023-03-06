@@ -1,6 +1,6 @@
 <template>
     <div class="items-container">
-      <div class="item" :class="{'item-blue': index % 2}" v-for="application, index in applications" :key="application.id">
+      <div  class="item" :class="{'item-blue': index % 2}" v-for="application, index in applications" :key="application.id">
         <p class="title-item text-item">{{application.name}}<span :class="{ red: application.status=='Стоп-сумма'}" class="text-status">{{application.status}}</span></p>
 
         <p class="text-item">
@@ -33,7 +33,6 @@
   }
   .item {
     background: #F2F2F2;
-    width: 100%;
     padding: 10px 10px;
     text-align: left;
     color: #4072cb;

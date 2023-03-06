@@ -1,11 +1,21 @@
 <template>
   <div class="home">
     <h2>Приглашения</h2>
-    <ApplicationsList v-bind:applications="invitation_applications" />
+    <ApplicationsList :applications="invitation_applications" />
     <h2>Мои заявки</h2>
-    <ApplicationsList v-bind:applications="my_applications"/>
+    <ApplicationsList :applications="my_applications"/>
     <h2>Чаты</h2>
-    <ApplicationsList v-bind:applications="applications"/>
+    <ApplicationsList :applications="applications"/>
+
+    <div v-show="true">
+    <ModalLayout />
+    <ModalDialog :applications="applications"/>
+    <!-- <div class="footer-div">
+      <button class="create">Присоединиться</button>
+    </div> -->
+    <ActionButton />
+  </div>
+
     <ActionButton></ActionButton>
   </div>
 </template>
@@ -14,12 +24,26 @@
 // @ is an alias to /src
 import ApplicationsList from "@/components/ApplicationsList.vue";
 import ActionButton from "@/components/ActionButton.vue";
+import ModalDialog from "@/components/ModalDialog.vue";
+import ModalLayout from "@/components/ModalLayout.vue";
 
 export default {
   name: "HomeView",
   components: {
     ActionButton,
     ApplicationsList,
+    ModalDialog,
+    ModalLayout,
+  },
+  methods: {
+    greet(event) {
+      // `this` в методе указывает на текущий активный экземпляр
+      alert('Привет, ' + this.name + '!')
+      // `event` — нативное событие DOM
+      if (event) {
+        alert(event.target.tagName)
+      }
+    }
   },
   data() {
     return {
