@@ -3,7 +3,7 @@ import HomeView from '../views/HomeView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/:categories',
     name: 'home',
     component: HomeView
   },
@@ -24,7 +24,7 @@ const routes = [
     component: () => import('../views/InvitationView.vue')
   },
   {
-    path: '/application/:id',
+    path: '/:categories/application/:id',
     name: 'application',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -32,7 +32,7 @@ const routes = [
     component: () => import('../views/ApplicationView.vue')
   },
   {
-    path: '/create',
+    path: '/:categories/create',
     name: 'create',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -40,7 +40,7 @@ const routes = [
     component: () => import('../views/CreateView.vue')
   },
   {
-    path: '/creatingvote',
+    path: '/:categories/creatingvote',
     name: 'creatingvote',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -48,7 +48,7 @@ const routes = [
     component: () => import('../views/CreatingVote.vue')
   },
   {
-    path: '/voting',
+    path: '/:categories/voting',
     name: 'voting',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

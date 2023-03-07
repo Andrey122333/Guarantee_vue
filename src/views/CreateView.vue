@@ -25,7 +25,7 @@
         <span class="title-item">Описание</span>
         <textarea class="create-description"></textarea>
         <div class="item">
-        <router-link to="/">Список заявок</router-link>
+        <router-link :to="'/'+$route.params.categories">Список заявок</router-link>
       </div>
     </div>
     <ActionButton>Создать</ActionButton>

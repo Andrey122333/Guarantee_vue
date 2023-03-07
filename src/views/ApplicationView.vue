@@ -3,6 +3,7 @@
       <div class="modal-info">
         <details><summary>
         <h2 class="modal-name">Название заявки {{ $route.params.id }}</h2> 
+        <p class="text-item" :class="{ red: application.status=='Стоп-сумма'}">{{application.status}}<span class="text-status">Идет голосование</span></p>
         <InfoText :application="application"/>
         <Contribution> Взнос: {{ application.contribution }}Р</Contribution>
         <Contribution>Начать голосование за сумму взноса</Contribution>
@@ -16,7 +17,7 @@
       <div class="modal-users">
       <div class="modal-users-item">
         <details><summary>
-        <p class="users-name">Участники (12/100):</p>    </summary>
+        <p class="users-name">Участники ({{application.participants.length}}/100):</p>    </summary>
         <div class="user-item">
           <img class="user-photo"
           src="https://cheboksari.imperiya-pola.ru/img/nophoto.jpg">
@@ -28,7 +29,8 @@
       </details>
       </div>
     </div>
-    <div class="events-div">
+  </div>
+  <div class="events-div">
       <div class="modal-users-item">
         <details><summary>
         <p class="events-name" >События:</p>
@@ -36,7 +38,6 @@
       </details>
     </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -65,7 +66,7 @@ export default {
         id: 2,
         type: "my_application",
           name: "Заявка 1",
-          status: "Открыта",
+          status: "Стоп-сумма",
           city: "Москва",
           date: "15.09.2022",
           contribution: 1100,
@@ -86,19 +87,20 @@ $create-height: 70px;
   display: inline;
 }
 .modal-dialog {
+  margin-top: 30px;
     background: #879ac5;
     // position: fixed;
     // height: calc(90vh - $create-height);
     // width: 90vw;
     // left: 5vw;
     // top: 5vh;
-    border-radius: 20px;
+    border-radius: 0px 0px 20px 20px;
     overflow: auto;
   }
   .modal-info {
     float: left;
       background: #fff;
-      border-radius: 20px 20px 0px 0px;
+      border-radius: 0px 0px 20px 20px;
   }
   .icon-close {
     height: 20px;
@@ -159,5 +161,23 @@ $create-height: 70px;
   .events-name {
     display: inline;
     margin-bottom: 10px;
+  }
+
+  .text-item {
+    margin-top: 10px;
+    color: #40CB4E;
+    height: 30px;
+    font-weight: bold;
+    margin: 10px 0px;
+  }
+  .text-status{
+    margin-left: 5px;
+    color: #40CB4E;
+  }
+  .red {
+    color: #CB4040;
+  }
+  .text-status::before {
+    content: "●";
   }
   </style>

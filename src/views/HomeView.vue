@@ -7,7 +7,7 @@
     <h2>Чаты</h2>
     <ApplicationsList :applications="applications" @open="open"/>
 
-    <router-link to="/create"><ActionButton>Создать заявку</ActionButton></router-link>
+    <router-link :to="$route.params.categories+'/create'"><ActionButton>Создать заявку</ActionButton></router-link>
 
     <div v-if="window">
     <ModalLayout />
@@ -47,7 +47,7 @@ export default {
     open(application) {
       console.log(application);
       if (application.type=='my_application') {
-        window.location.href = 'application/'+application.id
+        window.location.href = this.$route.params.categories+'/application/'+application.id
       } else {
         this.application = application;
         this.window = true;
