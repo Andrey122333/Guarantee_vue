@@ -24,8 +24,11 @@
       </div>
         <span class="title-item">Описание</span>
         <textarea class="create-description"></textarea>
+        <div class="item">
+        <router-link to="/">Список заявок</router-link>
+      </div>
     </div>
-    <ActionButton></ActionButton>
+    <ActionButton>Создать</ActionButton>
   </div>
 </template>
   

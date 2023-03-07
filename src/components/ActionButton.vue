@@ -1,18 +1,14 @@
 <template>
         <div class="footer-div">
-            <button class="button">{{text}}</button>
+            <button class="button">
+              <slot></slot>
+            </button>
     </div>
 </template>
 
 <script>
 export default {
   name: "",
-  props: {
-    text: {
-      type: Text,
-      required: true,
-    },
-  },
 };
 </script>
 

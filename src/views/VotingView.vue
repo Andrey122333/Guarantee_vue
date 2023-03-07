@@ -62,7 +62,7 @@
 
 
 
-    <ActionButton :text="Создать"></ActionButton>
+    <ActionButton>Создать</ActionButton>
   </div>
 </template>
 

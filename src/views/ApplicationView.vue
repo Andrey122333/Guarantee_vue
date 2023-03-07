@@ -2,12 +2,14 @@
       <div class="modal-dialog">
       <div class="modal-info">
         <details><summary>
-        <h2 class="modal-name">Название заявки</h2> 
-        <InfoText/>
-        <Contribution/>
+        <h2 class="modal-name">Название заявки {{ $route.params.id }}</h2> 
+        <InfoText :application="application"/>
+        <Contribution> Взнос: {{ application.contribution }}Р</Contribution>
+        <Contribution>Начать голосование за сумму взноса</Contribution>
+        <Contribution>Начать голосование за статус заявки</Contribution>
       </summary>
-        <TagsList/>
-        <Description/>
+        <TagsList :tags="application.tags"/>
+        <Description :application="application"/>
       </details>
       </div>
 
@@ -26,12 +28,15 @@
       </details>
       </div>
     </div>
-    <div>
-      <div class="">
+    <div class="events-div">
+      <div class="modal-users-item">
+        <details><summary>
         <p class="events-name" >События:</p>
-      </div>
+      </summary>
+      </details>
     </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -51,6 +56,26 @@ export default {
     TagsList,
     Description,
     UsersList,
+  },
+  data() {
+    return {
+      window: false,
+      application: 
+      {
+        id: 2,
+        type: "my_application",
+          name: "Заявка 1",
+          status: "Открыта",
+          city: "Москва",
+          date: "15.09.2022",
+          contribution: 1100,
+          tags: ["das", "dsa"],
+          description: "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
+          participants: [
+            { id: 1,  name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
+          ],
+        },
+    };
   },
 }
 </script>
@@ -86,7 +111,7 @@ $create-height: 70px;
   }
   .modal-users-item {
     float: left;
-      margin: 5px 5vw;
+      margin: 15px 5vw;
       width: 80vw;
       text-align: left;
   }
@@ -97,6 +122,7 @@ $create-height: 70px;
   
   .user-item {
     float: left;
+    margin-top: 10px;
     margin-bottom: 10px;
   }
   .user-photo {
@@ -125,8 +151,13 @@ $create-height: 70px;
     margin-top: 3px;
     margin-left: 10px;
   }
-  .events-name {
+  .events-div {
     float: left;
-    font-size: 20px;
+    width: 100%;
+    background: #fff;
+  }
+  .events-name {
+    display: inline;
+    margin-bottom: 10px;
   }
   </style>

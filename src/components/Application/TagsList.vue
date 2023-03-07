@@ -1,12 +1,17 @@
 <template>
           <div class="tags">
-          <div class="tag">Тег №1</div>
+          <div class="tag" v-for="tag, index in tags" :key="index" >{{ tag }}</div>
         </div>
 </template>
 
 <script>
 export default {
-
+  props: {
+    tags: {
+      type: Array,
+      required: true,
+    },
+  },
 }
 </script>
 

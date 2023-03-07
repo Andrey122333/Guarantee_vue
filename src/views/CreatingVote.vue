@@ -17,7 +17,7 @@
         </div>
         </div>
     </div>
-      <ActionButton></ActionButton>
+      <ActionButton>Создать</ActionButton>
 
 
 
@@ -27,7 +27,7 @@
     <!-- <div class="footer-div">
       <button class="create">Присоединиться</button>
     </div> -->
-    <ActionButton />
+    <ActionButton>Создать</ActionButton>
   </div>
 
     </div>

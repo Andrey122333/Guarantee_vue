@@ -1,19 +1,18 @@
 <template>
         <p class="modal-description">
-        Подробное описание заявки. Consectetur adipiscing elit. Suspendisse
-        cursus, lorem et ultricies interdum, ante dolor tincidunt lectus, vel
-        molestie nunc elit vitae nisi. Nam a neque viverra, efficitur elit sit
-        amet, scelerisque purus. Nulla venenatis purus id lacus facilisis, ut
-        dictum risus commodo. Donec et erat interdum, vehicula odio quis,
-        ultricies nulla. Fusce bibendum, nulla viverra posuere iaculis, tortor
-        justo vulputate justo.
+       {{ application.description }}
       </p>
 </template>
 
 <script>
 export default {
-
-}
+  props: {
+    application: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
@@ -23,6 +22,6 @@ export default {
   margin: 5px 5vw;
   text-align: justify;
   width: 80vw;
-  height: 135px;
+  //max-height: 135px;
 }
 </style>

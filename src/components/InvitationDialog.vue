@@ -1,27 +1,39 @@
 <template>
   <div class="modal-dialog">
     <div class="modal-info">
-      <button class="button-close"><i class="icon-close"   @click="$emit('close')"></i></button>
-      <h2 v-if="application.type =='application'" class="modal-name">Название заявки</h2>
-      <h2 v-if="application.type =='invitation_application'" class="modal-name">Приглашение</h2>
-      <h3 v-if="application.type =='invitation_application'">Кандидат на исполнение</h3>
-      <UsersList :participants="application.who_invited" v-if="application.type =='invitation_application'"/>
-      <InfoText :application="application"/>
-      <Contribution style="width: 80vw;"> Взнос: {{ application.contribution }}Р</Contribution>
-      <TagsList :tags="application.tags" />
-      <Description :application="application"/>
+      <button class="button-close">
+        <i class="icon-close" @click="$emit('close')"></i>
+      </button>
+      <h2 class="modal-name">Приглашение</h2>
+      <h3>Кандидат на исполнение</h3>
+
+      <div class="modal-users-item">
+        <div class="user-item">
+          <img
+            class="user-photo"
+            src="https://www.amica.it/wp-content/uploads/2020/02/prima-gallery1.jpg?v=926743"
+          />
+          <div class="user-text">
+            <span class="user-name">Никнейм участника</span>
+            <span class="user-role">Отправил приглашение</span>
+          </div>
+        </div>
+      </div>
+      <InfoText />
+      <Contribution />
+      <TagsList />
+      <Description />
     </div>
-    <Users :participants="application.participants" />
+    <Users />
   </div>
 </template>
-
-<script>
+  
+  <script>
 import InfoText from "@/components/Application/InfoText.vue";
 import Contribution from "@/components/Application/Contribution.vue";
 import TagsList from "@/components/Application/TagsList.vue";
 import Description from "@/components/Application/Description.vue";
 import Users from "@/components/Application/Users.vue";
-import UsersList from "@/components/Application/UsersList.vue";
 
 export default {
   name: "",
@@ -31,7 +43,6 @@ export default {
     TagsList,
     Description,
     Users,
-    UsersList
   },
   props: {
     application: {
@@ -41,8 +52,8 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
+  
+  <style scoped lang="scss">
 $create-height: 70px;
 
 .modal-layout {

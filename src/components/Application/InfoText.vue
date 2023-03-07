@@ -1,14 +1,19 @@
 <template>
           <div class="modal-info-text">
-          <span class="modal-info-left">создана: 15.09.2022</span>
-          <span class="modal-info-right">г. Москва</span>
+          <span class="modal-info-left">создана: {{ application.date }}</span>
+          <span class="modal-info-right">{{ application.city }}</span>
         </div>
 </template>
 
 <script>
 export default {
-
-}
+  props: {
+    application: {
+      type: Array,
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

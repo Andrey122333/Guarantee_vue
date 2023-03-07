@@ -1,6 +1,8 @@
 <template>
     <div class="items-container">
-      <div  class="item" :class="{'item-blue': index % 2}" v-for="application, index in applications" :key="application.id">
+      <div  class="item" :class="{'item-blue': index % 2}" v-for="application, index in applications" :key="application.id" 
+      @click="$emit('open', application)"
+      > 
         <p class="title-item text-item">{{application.name}}<span :class="{ red: application.status=='Стоп-сумма'}" class="text-status">{{application.status}}</span></p>
 
         <p class="text-item">

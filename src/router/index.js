@@ -24,20 +24,12 @@ const routes = [
     component: () => import('../views/InvitationView.vue')
   },
   {
-    path: '/application',
+    path: '/application/:id',
     name: 'application',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import('../views/ApplicationView.vue')
-  },
-  {
-    path: '/search',
-    name: 'search',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/SearchView.vue')
   },
   {
     path: '/create',

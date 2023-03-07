@@ -1,13 +1,13 @@
 <template>
           <div class="modal-users-item">
-          <div class="user-item">
+          <div class="user-item" v-for="participant in participants" :key="participant.id">
           <img
             class="user-photo"
-            src="https://cheboksari.imperiya-pola.ru/img/nophoto.jpg"
+            :src="participant.photo"
           />
-          <div class="user-text">
-            <span class="user-name">Никнейм участника</span>
-            <span class="user-role">Кандидат на исполнение</span>
+          <div class="user-text" >
+            <span class="user-name">{{ participant.name }}</span>
+            <span class="user-role">{{ participant.role }}</span>
           </div>
         </div>
     </div>
@@ -15,7 +15,12 @@
 
 <script>
 export default {
-
+  props: {
+    participants: {
+      type: Array,
+      required: true,
+    },
+  },
 }
 </script>
 
@@ -49,6 +54,7 @@ export default {
   font-size: 14px;
   margin-top: 3px;
   margin-left: 10px;
+  width: 100%;
 }
 .modal-users-item {
   float: left;

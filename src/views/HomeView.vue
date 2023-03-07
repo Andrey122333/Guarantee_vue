@@ -1,22 +1,22 @@
 <template>
   <div class="home">
     <h2>Приглашения</h2>
-    <ApplicationsList :applications="invitation_applications" />
+    <ApplicationsList :applications="invitation_applications" @open="open" />
     <h2>Мои заявки</h2>
-    <ApplicationsList :applications="my_applications"/>
+    <ApplicationsList :applications="my_applications" @open="open"/>
     <h2>Чаты</h2>
-    <ApplicationsList :applications="applications"/>
+    <ApplicationsList :applications="applications" @open="open"/>
 
-    <div v-show="true">
+    <router-link to="/create"><ActionButton>Создать заявку</ActionButton></router-link>
+
+    <div v-if="window">
     <ModalLayout />
-    <ModalDialog :applications="applications"/>
+    <ModalDialog :application="application" @close="close" />
     <!-- <div class="footer-div">
       <button class="create">Присоединиться</button>
     </div> -->
-    <ActionButton />
+    <ActionButton>Присоединиться</ActionButton>
   </div>
-
-    <ActionButton></ActionButton>
   </div>
 </template>
 
@@ -43,15 +43,30 @@ export default {
       if (event) {
         alert(event.target.tagName)
       }
+    },
+    open(application) {
+      console.log(application);
+      if (application.type=='my_application') {
+        window.location.href = 'application/'+application.id
+      } else {
+        this.application = application;
+        this.window = true;
+      }
+    },
+    close() {
+      this.window = false;
     }
   },
   data() {
     return {
+      window: false,
+      application: {},
       invitation_applications: [
       {
         id: 1,
+        type: "invitation_application",
           name: "Заявка 1",
-          who_invited: {name: "Юзер 1", photo: "ссылка"},
+          who_invited: [{id: 1, name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Отправил приглашение"}],
           role_invited: "Кандидат на исполнение",
           status: "Открыта",
           city: "Москва",
@@ -60,13 +75,15 @@ export default {
           tags: ["das", "dsa"],
           description: "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
           participants: [
-            { name: "Юзер 1", photo: "ссылка", role: "Кандидат на исполнение" },
+            { id: 1, name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
+            { id: 2, name: "Юзер 2", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
           ],
         },
       ],
       my_applications: [
       {
         id: 2,
+        type: "my_application",
           name: "Заявка 1",
           status: "Открыта",
           city: "Москва",
@@ -75,13 +92,14 @@ export default {
           tags: ["das", "dsa"],
           description: "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
           participants: [
-            { name: "Юзер 1", photo: "ссылка", role: "Кандидат на исполнение" },
+            { id: 1,  name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
           ],
         },
       ],
       applications: [
         {
           id: 3,
+          type: "application",
           name: "Заявка 1",
           status: "Открыта",
           city: "Москва",
@@ -90,11 +108,12 @@ export default {
           tags: ["das", "dsa"],
           description: "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
           participants: [
-            { name: "Юзер 1", photo: "ссылка", role: "Кандидат на исполнение" },
+            { id: 1,  name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
           ],
         },
         {
           id: 4,
+          type: "application",
           name: "Заявка 1",
           city: "Москва",
           status: "Стоп-сумма",
@@ -103,7 +122,7 @@ export default {
           tags: ["das", "dsa"],
           description: "Описание",
           participants: [
-            { name: "Юзер 1", photo: "ссылка", role: "Кандидат на исполнение" },
+            { id: 1,  name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
           ],
         },
       ],

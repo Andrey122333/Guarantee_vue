@@ -1,8 +1,8 @@
 <template>
       <div class="modal-users">
-        <p class="users-name">Участники (12/100):</p>
+        <p class="users-name">Участники ({{participants.length}}/100):</p>
       <div class="modal-users-item">
-        <UsersList />
+        <UsersList :participants="participants" />
       </div>
     </div>
 </template>
@@ -16,7 +16,7 @@ export default {
     UsersList,
   },
   props: {
-    application: {
+    participants: {
       type: Array,
       required: true,
     },
