@@ -4,7 +4,7 @@
       <button class="button-close"><i class="icon-close"   @click="$emit('close')"></i></button>
       <h2 v-if="application.type =='application'" class="modal-name">Название заявки</h2>
       <h2 v-if="application.type =='invitation_application'" class="modal-name">Приглашение</h2>
-      <h3 v-if="application.type =='invitation_application'">Кандидат на исполнение</h3>
+      <h3 v-if="application.type =='invitation_application'">{{ application.role_invited }}</h3>
       <UsersList :participants="application.who_invited" v-if="application.type =='invitation_application'"/>
       <InfoText :application="application"/>
       <Contribution style="width: 80vw;"> Взнос: {{ application.contribution }}Р</Contribution>

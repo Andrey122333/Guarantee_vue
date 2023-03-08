@@ -1,11 +1,11 @@
 <template>
     <div>
       <div class="create-layout">
-        <h2>Создание голосования</h2>
-        <div class="item">
+        <h2>Создание голосования {{ text[$route.params.type] }}</h2>
+        <!-- <div class="item">
           <span class="title-item">За:</span>
           <VueMultiselect v-model="selected" :options="options"> </VueMultiselect>
-        </div>
+        </div> -->
           <span class="title-item">Описание:</span>
           <textarea class="create-description"></textarea>
       </div>
@@ -21,14 +21,10 @@
 
 
 
-      <div v-show="true">
+      <!-- <div v-show="true">
     <ModalLayout />
-    <ModalDialog :applications="applications"/>
-    <!-- <div class="footer-div">
-      <button class="create">Присоединиться</button>
-    </div> -->
     <ActionButton>Создать</ActionButton>
-  </div>
+  </div> -->
 
     </div>
     
@@ -49,6 +45,11 @@ import ModalLayout from "@/components/ModalLayout.vue";
       return {
         selected: null,
         options: ["list", "of", "options"],
+        text: {
+        amount: "сумму взноса",
+        status: "смену статуса",
+        executor: "исполнителя",
+      },
       };
     },
   };

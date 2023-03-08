@@ -40,11 +40,11 @@ const routes = [
     component: () => import('../views/CreateView.vue')
   },
   {
-    path: '/:categories/creatingvote',
-    name: 'creatingvote',
+    path: '/:categories/creatingvote/:type',
+    name: 'creatingvoteamount',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
+    // which is lazy-loaded when the route is visited. //amount, status, executor, no
     component: () => import('../views/CreatingVote.vue')
   },
   {

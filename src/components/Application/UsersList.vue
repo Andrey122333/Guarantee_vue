@@ -28,6 +28,7 @@ export default {
 .user-item {
   float: left;
   margin-bottom: 10px;
+  width: 100%;
 }
 .user-photo {
   height: 50px;

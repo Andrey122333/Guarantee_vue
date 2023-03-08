@@ -5,9 +5,11 @@
         <h2 class="modal-name">Название заявки {{ $route.params.id }}</h2> 
         <p class="text-item" :class="{ red: application.status=='Стоп-сумма'}">{{application.status}}<span class="text-status">Идет голосование</span></p>
         <InfoText :application="application"/>
-        <Contribution> Взнос: {{ application.contribution }}Р</Contribution>
-        <Contribution>Начать голосование за сумму взноса</Contribution>
-        <Contribution>Начать голосование за статус заявки</Contribution>
+        <Voting :voting="application.voting" :participants_count="application.participants.length" v-if="application.voting.type!='no' && application.voting.type!='executor'" />
+
+        <Contribution v-if="application.voting.type!='amount'"> Взнос: {{ application.contribution }}Р</Contribution>
+        <Contribution @click="redirectToLink(this.$route.params.categories+'/creatingvote/amount')" v-if="application.voting.type=='no'">Начать голосование за сумму взноса</Contribution>
+        <Contribution @click="redirectToLink(this.$route.params.categories+'/creatingvote/status')" v-if="application.voting.type=='no'">Начать голосование за статус заявки</Contribution>
       </summary>
         <TagsList :tags="application.tags"/>
         <Description :application="application"/>
@@ -18,26 +20,22 @@
       <div class="modal-users-item">
         <details><summary>
         <p class="users-name">Участники ({{application.participants.length}}/100):</p>    </summary>
-        <div class="user-item">
-          <img class="user-photo"
-          src="https://cheboksari.imperiya-pola.ru/img/nophoto.jpg">
-     <div class="user-text">
-      <span class="user-name">Никнейм участника</span>
-      <span class="user-role">Кандидат на исполнение</span>
-     </div>
-        </div>
+          <UsersList :participants="application.participants" />
+
+          <Voting :voting="application.voting" style="background: #6B80A5; margin: 0px;" v-if="application.voting.type=='executor'" />
+          <GreyButton class="margin-top">Пригласить</GreyButton>
+          <GreyButton class="margin-top" @click="redirectToLink(this.$route.params.categories+'/creatingvote/executor')" v-if="application.voting.type=='no'">Начать голосование за исполнителя</GreyButton>
       </details>
       </div>
     </div>
   </div>
   <div class="events-div">
-      <div class="modal-users-item">
-        <details><summary>
-        <p class="events-name" >События:</p>
-      </summary>
+        <details><summary class="events-summary">
+        <p class="events-name" >События:</p>      </summary>
+        <EventsList :events="application.events"/>
       </details>
     </div>
-    </div>
+    <ActionButton>Редактировать заявку</ActionButton>
 </template>
 
 <script>
@@ -47,6 +45,10 @@ import Contribution from "@/components/Application/Contribution.vue";
 import TagsList from "@/components/Application/TagsList.vue";
 import Description from "@/components/Application/Description.vue";
 import UsersList from "@/components/Application/UsersList.vue";
+import Voting from "@/components/Application/Voting.vue";
+
+import GreyButton from "@/components/UI/GreyButton.vue";
+import EventsList from "@/components/EventsList.vue";
 
 export default {
   name: "HomeView",
@@ -57,6 +59,9 @@ export default {
     TagsList,
     Description,
     UsersList,
+    GreyButton,
+    EventsList,
+    Voting,
   },
   data() {
     return {
@@ -64,7 +69,6 @@ export default {
       application: 
       {
         id: 2,
-        type: "my_application",
           name: "Заявка 1",
           status: "Стоп-сумма",
           city: "Москва",
@@ -73,11 +77,22 @@ export default {
           tags: ["das", "dsa"],
           description: "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
           participants: [
-            { id: 1,  name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Кандидат на исполнение" },
+            { id: 1,  name: "Юзер 1", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Создатель" },
+            { id: 2,  name: "Юзер 2", photo: "https://cheboksari.imperiya-pola.ru/img/nophoto.jpg", role: "Исполнитель" },
           ],
+          events: [
+            {id: 2, text: "Изменена сумма взноса на 1100₽"},
+            {id: 1, text: "Закончилось голосование за сумму взноса"},
+          ],
+          voting: {type: "no", date: "2023-03-09 15:59:40", voted: "0"}, //amount, status, executor, no
         },
     };
   },
+  methods: {
+  redirectToLink(link) {
+    window.location.pathname = link;
+  }
+},
 }
 </script>
 
@@ -154,13 +169,23 @@ $create-height: 70px;
     margin-left: 10px;
   }
   .events-div {
+    text-align: left;
     float: left;
     width: 100%;
     background: #fff;
+    margin-top: 15px;
+    margin-bottom: 70px;
   }
   .events-name {
     display: inline;
     margin-bottom: 10px;
+  }
+  .events-summary {
+    margin: 0px 5vw;
+    width: 80vw;
+  }
+  .margin-top {
+    margin-top: 10px;
   }
 
   .text-item {
