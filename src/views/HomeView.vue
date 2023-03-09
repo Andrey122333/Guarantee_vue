@@ -36,14 +36,6 @@ export default {
     ModalLayout,
   },
   methods: {
-    greet(event) {
-      // `this` в методе указывает на текущий активный экземпляр
-      alert('Привет, ' + this.name + '!')
-      // `event` — нативное событие DOM
-      if (event) {
-        alert(event.target.tagName)
-      }
-    },
     open(application) {
       console.log(application);
       if (application.type=='my_application') {

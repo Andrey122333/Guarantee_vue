@@ -8,18 +8,24 @@
       <span class="title-item">Описание:</span>
       <textarea class="create-description"></textarea>
     </div>
-    <Users :participants="application.participants" />
+    <div class="modal-users">
+        <p class="users-name">Участники ({{application.participants.length}}/100):</p>
+      <div class="modal-users-item">
+        <UsersList :participants="application.participants" />
+      </div>
+    </div>
+    <GreyButton>Пригласить</GreyButton>
   </div>
 </template>
   
   <script>
-import Users from "@/components/Application/Users.vue";
-import UsersList from "@/components/Application/UsersList.vue";
+import GreyButton from "@/components/UI/GreyButton.vue";
+import UsersList from "@/components/Voting/UsersList.vue";
 
 export default {
   name: "",
   components: {
-    Users,
+    GreyButton,
     UsersList,
   },
   props: {
@@ -89,5 +95,12 @@ $create-height: 70px;
   width: 80%;
   margin: 10px 10%;
   min-height: 130px;
+}
+.users-name {
+  color: #fff;
+  float: left;
+  margin: 5px 5vw;
+  width: 80vw;
+  text-align: left;
 }
 </style>

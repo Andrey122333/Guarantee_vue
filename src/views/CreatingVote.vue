@@ -13,7 +13,7 @@
       <div class="create-layout">
         <h3>{{ textName[$route.params.type] }}:</h3>
         <div class="item">
-          <button class="add_btn">
+          <button @click="open()" class="add_btn">
             Добавить {{ textButton[$route.params.type] }}
           </button>
         </div>
@@ -21,7 +21,7 @@
     </div>
     <ActionButton>Создать голосование</ActionButton>
 
-    <div v-show="true">
+    <div v-show="window">
       <ModalLayout />
       <ModalCandidates :application="application" />
       <ActionButton>Создать</ActionButton>
@@ -93,6 +93,15 @@ export default {
         voting: { type: "no", date: "2023-03-09 15:59:40", voted: "0" }, //amount, status, executor, no
       },
     };
+  },
+  methods: {
+    open() {
+      console.log("31312");
+        this.window = true;
+    },
+    close() {
+      this.window = false;
+    }
   },
 };
 </script>
