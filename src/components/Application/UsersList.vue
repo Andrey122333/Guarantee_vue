@@ -55,7 +55,7 @@ export default {
   font-size: 14px;
   margin-top: 3px;
   margin-left: 10px;
-  width: 100%;
+  width: 80%;
 }
 .modal-users-item {
   float: left;
