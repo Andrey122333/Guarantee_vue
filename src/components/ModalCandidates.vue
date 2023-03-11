@@ -11,10 +11,10 @@
     <div class="modal-users">
         <p class="users-name">Участники ({{application.participants.length}}/100):</p>
       <div class="modal-users-item">
-        <UsersList :participants="application.participants" />
+        <UsersList @input="(e)=>$emit('update:modelValue', e)" :participants="application.participants" />
       </div>
     </div>
-    <GreyButton>Пригласить</GreyButton>
+    <!-- <GreyButton>Пригласить</GreyButton> -->
   </div>
 </template>
   
@@ -33,6 +33,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      checked: {}
+    }
   },
 };
 </script>

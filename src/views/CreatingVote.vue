@@ -12,8 +12,11 @@
     <div class="background-blue">
       <div class="create-layout">
         <h3>{{ textName[$route.params.type] }}:</h3>
+        <div class="modal-users-item">
+        <UsersList :participants="candidates" />
+      </div>
         <div class="item">
-          <button @click="open()" class="add_btn">
+          <button @click="open" class="add_btn">
             Добавить {{ textButton[$route.params.type] }}
           </button>
         </div>
@@ -23,8 +26,8 @@
 
     <div v-show="window">
       <ModalLayout />
-      <ModalCandidates :application="application" />
-      <ActionButton>Создать</ActionButton>
+      <ModalCandidates v-model="checked" @close="close" :application="application" />
+      <ActionButton @click="add">Создать</ActionButton>
     </div>
   </div>
 </template>
@@ -34,6 +37,7 @@ import VueMultiselect from "vue-multiselect";
 import ActionButton from "@/components/ActionButton.vue";
 import ModalCandidates from "@/components/ModalCandidates.vue";
 import ModalLayout from "@/components/ModalLayout.vue";
+import UsersList from "@/components/Application/UsersList.vue";
 
 export default {
   name: "SearchView",
@@ -42,9 +46,13 @@ export default {
     ActionButton,
     ModalCandidates,
     ModalLayout,
+    UsersList,
   },
   data() {
     return {
+      candidates: [],
+      checked: {},
+      window: false,
       selected: null,
       options: ["list", "of", "options"],
       text: {
@@ -100,6 +108,10 @@ export default {
         this.window = true;
     },
     close() {
+      this.window = false;
+    },
+    add() {
+      this.candidates.push(this.checked);
       this.window = false;
     }
   },

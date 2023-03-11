@@ -84,7 +84,7 @@ export default {
             {id: 2, text: "Изменена сумма взноса на 1100₽"},
             {id: 1, text: "Закончилось голосование за сумму взноса"},
           ],
-          voting: {type: "no", date: "2023-03-09 15:59:40", voted: "0"}, //amount, status, executor, no
+          voting: {type: "no", date: "2023-04-09 15:59:40", voted: "0"}, //amount, status, executor, no
         },
     };
   },
