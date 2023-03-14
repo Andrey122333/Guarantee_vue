@@ -15,13 +15,15 @@
           name="voting"
           id="one"
           :value="participant"
-          @input="$emit('input', $event.target.value)"
+          v-model="ittest"
+          @input="(e)=>test(e)"
         />
       </div>
     </div>
+    {{ ittest }}
   </div>
 </template>
-
+<!-- //$emit('input', $event.target._value) -->
 <script>
 export default {
   props: {
@@ -30,6 +32,16 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      ittest: {}
+    }
+  },
+  methods: {
+    test(e) {
+      console.log(e.target._value);
+    },
+  }
 };
 </script>
 <style scoped lang="scss">
