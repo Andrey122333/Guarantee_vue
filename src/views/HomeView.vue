@@ -7,7 +7,26 @@
     <h2>Чаты</h2>
     <ApplicationsList :applications="applications" @open="open"/>
 
+    <!-- <div class="footer-div">
+      <router-link :to="$route.params.categories+'/create'">
+            <button class="button">
+              Поиск
+            </button>
+            </router-link>
+            <router-link :to="$route.params.categories+'/create'">
+            <button class="button">
+              Создать заявку
+            </button>
+            </router-link>
+            <router-link :to="$route.params.categories+'/create'">
+            <button class="button">
+              Страница
+            </button>
+            </router-link>
+    </div> -->
+
     <router-link :to="$route.params.categories+'/create'"><ActionButton>Создать заявку</ActionButton></router-link>
+
 
     <div v-if="window">
     <ModalLayout />
@@ -122,3 +141,25 @@ export default {
   },
 };
 </script>
+
+
+
+<style scoped lang="scss">
+.footer-div {
+    width: 100%;
+    position: fixed;
+    bottom: 0px;
+  }
+
+  .button {
+    float: left;
+    height: 70px;
+    width: 30%;
+    background: #29426d;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    border: 0px;
+    margin-left: 2.5%;
+  }
+</style>

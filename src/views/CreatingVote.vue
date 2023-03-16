@@ -13,9 +13,15 @@
       <div class="create-layout">
         <h3>{{ textName[$route.params.type] }}:</h3>
         <div class="modal-users-item">
-        <UsersList :participants="candidates" />
+        <UsersList v-if="$route.params.type=='executor'" :participants="candidates" />
+        <StatusList v-if="$route.params.type=='status'"/>
+
+        <div class="user-item">
+    </div>
+
+
       </div>
-        <div class="item">
+        <div v-if="$route.params.type!='status'" class="item">
           <button @click="open" class="add_btn">
             Добавить {{ textButton[$route.params.type] }}
           </button>
@@ -38,6 +44,7 @@ import ActionButton from "@/components/ActionButton.vue";
 import ModalCandidates from "@/components/ModalCandidates.vue";
 import ModalLayout from "@/components/ModalLayout.vue";
 import UsersList from "@/components/Application/UsersList.vue";
+import StatusList from "@/components/Voting/StatusList.vue";
 
 export default {
   name: "SearchView",
@@ -47,6 +54,7 @@ export default {
     ModalCandidates,
     ModalLayout,
     UsersList,
+    StatusList,
   },
   data() {
     return {
@@ -156,6 +164,7 @@ export default {
   float: left;
   width: 100%;
   text-align: left;
+  margin-bottom: 70px;
 }
 .add_btn {
   background: #6b80a5;
