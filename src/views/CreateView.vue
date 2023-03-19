@@ -28,7 +28,7 @@
         <router-link :to="'/'+$route.params.categories">Список заявок</router-link>
       </div>
     </div>
-    <ActionButton>Создать</ActionButton>
+    <ActionButton @click="create()">Создать</ActionButton>
   </div>
 </template>
   
@@ -47,6 +47,12 @@ export default {
       options: ["list", "of", "options"],
     };
   },
+  methods: {
+    create() {
+      console.log(121331)
+      window.location.href = this.$route.params.categories
+    },
+  }
 };
 </script>
 

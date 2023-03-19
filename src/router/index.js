@@ -48,7 +48,7 @@ const routes = [
     component: () => import('../views/CreatingVote.vue')
   },
   {
-    path: '/:categories/voting',
+    path: '/:categories/voting/:type',
     name: 'voting',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

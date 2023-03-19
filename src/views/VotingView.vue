@@ -1,5 +1,6 @@
 <template>
- <div>
+ <div class="voting-background">
+  <div class="white-background">
     <div class="create-layout">
       <h2>Голосование</h2>
       <p>за сумму взноса</p>
@@ -22,6 +23,7 @@
         ultricies nulla. Fusce bibendum, nulla viverra posuere iaculis, tortor
         justo vulputate justo.
       </p>
+    </div>
       <div class="background-blue">
       <div class="create-layout">
         <h3>Варианты:</h3>
@@ -34,7 +36,7 @@
             </div>
             <div class="voting-item-text">
                 <label class="voting-description">Описание, почему эта сумма оптимальна</label>
-                <input class="text-right" type="radio" id="one" value="Один" v-model="picked">
+                <input class="text-right" type="radio" name="voting" value="Один" v-model="picked">
             </div>
             </div>
         </div>
@@ -47,47 +49,72 @@
             </div>
             <div class="voting-item-text">
                 <label class="voting-description">Описание, почему эта сумма оптимальна</label>
-                <input class="text-right" type="radio" id="two" value="Два" v-model="picked">
+                <input class="text-right" type="radio" name="voting" value="Два" v-model="picked">
             </div>
             </div>
         </div>
 
         <div class="item">
-            <button class="add_btn">Предложить свою сумму</button>
+            <button @click="open" class="add_btn">Предложить свою сумму</button>
         </div>
 
 
         </div>
     </div>
-
-
-
     <ActionButton>Создать</ActionButton>
   </div>
+
+  <div v-show="window">
+      <ModalMini v-if="$route.params.type=='amount'" @close="close"/>
+  </div>
+
 </template>
 
 <script>
 import VueMultiselect from "vue-multiselect";
 import ActionButton from "@/components/ActionButton.vue";
 import Description from "@/components/Application/Description.vue";
+import ModalMini from "@/components/ModalMini.vue";
+
   
   export default {
     name: "SearchView",
     components: { 
-      VueMultiselect, ActionButton, Description,
+      VueMultiselect, ActionButton, Description, ModalMini,
     },
     data() {
       return {
+        window: false,
         selected: null,
         options: ["list", "of", "options"],
       };
     },
+    methods: {
+      open() {
+        this.window = true;
+    },
+    close() {
+      this.window = false;
+    },
+    add() {
+      this.candidates.push(this.checked);
+      this.window = false;
+    }
+  },
   };
   </script>
   
   <style src="vue-multiselect/dist/vue-multiselect.css"></style>
   
   <style scoped lang="scss">
+  .voting-background {
+    background: #839BC6;
+    min-height: 100vh;
+  }
+  .white-background {
+    float: left;
+    background: #fff;
+  }
   .create-layout {
     margin: 5px 5vw;
     text-align: left;

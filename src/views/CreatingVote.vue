@@ -31,9 +31,10 @@
     <ActionButton>Создать голосование</ActionButton>
 
     <div v-show="window">
-      <ModalLayout />
-      <ModalCandidates v-model="checked" @close="close" :application="application" />
-      <ActionButton @click="add">Создать</ActionButton>
+      <ModalLayout v-if="$route.params.type=='executor'" />
+      <ModalMini v-if="$route.params.type=='amount'" @close="close"/>
+      <ModalCandidates v-if="$route.params.type=='executor'" v-model="checked" @close="close" :application="application" />
+      <ActionButton v-if="$route.params.type=='executor'" @click="add">Создать</ActionButton>
     </div>
   </div>
 </template>
@@ -45,6 +46,7 @@ import ModalCandidates from "@/components/ModalCandidates.vue";
 import ModalLayout from "@/components/ModalLayout.vue";
 import UsersList from "@/components/Application/UsersList.vue";
 import StatusList from "@/components/Voting/StatusList.vue";
+import ModalMini from "@/components/ModalMini.vue";
 
 export default {
   name: "SearchView",
@@ -55,6 +57,7 @@ export default {
     ModalLayout,
     UsersList,
     StatusList,
+    ModalMini,
   },
   data() {
     return {
@@ -112,7 +115,6 @@ export default {
   },
   methods: {
     open() {
-      console.log("31312");
         this.window = true;
     },
     close() {

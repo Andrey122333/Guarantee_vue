@@ -1,5 +1,10 @@
 <template>
   <div class="home">
+    <div v-if="$route.params.categories == 'vacation'" class="item">
+        <span class="title-item">Колличество звёзд:</span>
+        <VueMultiselect v-model="selected" :options="options"> </VueMultiselect>
+      </div>
+      
     <h2>Приглашения</h2>
     <ApplicationsList :applications="invitation_applications" @open="open" />
     <h2>Мои заявки</h2>
@@ -18,7 +23,7 @@
               Создать заявку
             </button>
             </router-link>
-            <router-link :to="$route.params.categories+'/create'">
+            <router-link :to="$route.params.categories+'/profile'">
             <button class="button">
               Страница
             </button>
@@ -41,6 +46,7 @@
 
 <script>
 // @ is an alias to /src
+import VueMultiselect from "vue-multiselect";
 import ApplicationsList from "@/components/ApplicationsList.vue";
 import ActionButton from "@/components/ActionButton.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
@@ -53,6 +59,7 @@ export default {
     ApplicationsList,
     ModalDialog,
     ModalLayout,
+    VueMultiselect,
   },
   methods: {
     open(application) {
@@ -71,6 +78,8 @@ export default {
   data() {
     return {
       window: false,
+      selected: null,
+      options: [1, 2 , 3, 4, 5],
       application: {},
       invitation_applications: [
       {
@@ -145,6 +154,21 @@ export default {
 
 
 <style scoped lang="scss">
+.title-item {
+  float: left;
+  font-weight: bold;
+  line-height: 40px;
+}
+.multiselect {
+  float: right;
+  width: 50vw;
+}
+.item {
+  float: left;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
 .footer-div {
     width: 100%;
     position: fixed;
