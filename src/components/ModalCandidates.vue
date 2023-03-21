@@ -11,7 +11,7 @@
     <div class="modal-users">
         <p class="users-name">Участники ({{application.participants.length}}/100):</p>
       <div class="modal-users-item">
-        <UsersList @input="(e)=>$emit('update:modelValue', e)" :participants="application.participants" />
+        <UsersList @input="(e)=>$emit('update:modelValue', e.target.value)" :participants="application.participants" />
       </div>
     </div>
     <!-- <GreyButton>Пригласить</GreyButton> -->

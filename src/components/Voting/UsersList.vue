@@ -2,7 +2,7 @@
   <div class="modal-users-item">
     <div
       class="user-item"
-      v-for="participant in participants"
+      v-for="participant, index in participants"
       :key="participant.id"
     >
       <img class="user-photo" :src="participant.photo" />
@@ -14,13 +14,11 @@
           type="radio"
           name="voting"
           id="one"
-          :value="participant"
-          v-model="ittest"
-          @input="(e)=>test(e)"
+          :value="index"
+          @input="test"
         />
       </div>
     </div>
-    {{ ittest }}
   </div>
 </template>
 <!-- //$emit('input', $event.target._value) -->
@@ -34,12 +32,13 @@ export default {
   },
   data() {
     return {
-      ittest: {}
     }
   },
   methods: {
     test(e) {
-      console.log(e.target._value);
+      this.$emit('update:modelValue', e.target.value)
+      // console.log(e.target.value);
+      // console.log(e.target._value);
     },
   }
 };

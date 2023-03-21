@@ -50,7 +50,7 @@ export default {
   methods: {
     create() {
       console.log(121331)
-      window.location.href = this.$route.params.categories
+      window.location.pathname = this.$route.params.categories;
     },
   }
 };

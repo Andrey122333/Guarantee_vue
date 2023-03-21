@@ -121,7 +121,13 @@ export default {
       this.window = false;
     },
     add() {
-      this.candidates.push(this.checked);
+      //console.log(this.checked);
+
+      if (this.candidates.includes(this.application.participants[this.checked]))
+         alert("Пользователь уже добавлен")
+      else 
+      this.candidates.push(this.application.participants[this.checked]);
+
       this.window = false;
     }
   },
