@@ -46,7 +46,7 @@
   }
   .item {
     display: inline-flex;
-    min-width: 100vw;
+    min-width: calc(100vw - 20px);
 
     background: #F2F2F2;
     padding: 10px 10px;
