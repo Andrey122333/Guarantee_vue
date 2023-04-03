@@ -2,22 +2,24 @@
   <div class="home">
     <OffersList :offers="offers" />
 
-    <div v-if="vacation.includes($route.params.categories)" class="item">
+    <!-- <div v-if="vacation.includes($route.params.categories)" class="item">
       <span class="title-item">Колличество звёзд:</span>
       <StarRating class="star-rating" :star-size="30" v-model="rating" />
-    </div>
+    </div> -->
 
     <!-- <div class="input">
       <span class="title-item">Поиск: </span>
         <input class="input-text" type="text" placeholder="Поиск" />
       </div> -->
 
-    <h2>Приглашения</h2>
+    <!-- <h2>Приглашения</h2>
     <ApplicationsList :applications="invitation_applications" @open="open" />
     <h2>Мои заявки</h2>
-    <ApplicationsList :applications="my_applications" @open="open" />
-    <h2>Чаты</h2>
-    <ApplicationsList :applications="applications" @open="open" />
+    <ApplicationsList :applications="my_applications" @open="open" /> -->
+    <!-- <h2>Заявки</h2>
+    <ApplicationsList :applications="applications" @open="open" /> -->
+
+    <MyСhat />
 
     <div class="footer-div">
       <router-link :to="$route.params.categories+'/create'">
@@ -37,7 +39,7 @@
             </router-link>
     </div>
 
-    <div
+    <!-- <div
       v-if="vacation.includes($route.params.categories)"
       class="footer-div-top"
     >
@@ -50,7 +52,7 @@
       <router-link :to="'/resorts'">
         <button class="button">Курорты</button>
       </router-link>
-    </div>
+    </div> -->
 
     <!-- <router-link :to="$route.params.categories + '/create'"
       ><ActionButton>Создать заявку</ActionButton></router-link
@@ -75,6 +77,7 @@ import ApplicationsList from "@/components/ApplicationsList.vue";
 import ActionButton from "@/components/ActionButton.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
 import ModalLayout from "@/components/ModalLayout.vue";
+import MyСhat from "@/components/MyСhat.vue";
 import StarRating from "vue-star-rating";
 
 export default {
@@ -86,6 +89,7 @@ export default {
     ModalDialog,
     ModalLayout,
     OffersList,
+    MyСhat,
     StarRating,
   },
   methods: {

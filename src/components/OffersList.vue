@@ -35,7 +35,6 @@
   $input-height: 70px;
   
   .items-container {
-    margin-top: 20px;
     max-width: 100%;
     display: inline-flex;
 
