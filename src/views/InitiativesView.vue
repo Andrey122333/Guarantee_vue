@@ -1,18 +1,36 @@
 <template>
   <div class="home">
-
-      <router-link :to="'/lawsuits'">
-        <h3 class="title-item">Cовместные иски</h3>
-      </router-link>
-      <router-link :to="'/сlaims'">
-        <h3 class="title-item">Претензии</h3>
-      </router-link>
-      <router-link :to="'/сooperatives'">
-        <h3 class="title-item">Кооперативы </h3>
-      </router-link>
-      <router-link :to="'/hiring'">
-        <h3 class="title-item">Совместный найм</h3>
-      </router-link>
+    <div class="items-container">
+      <h2>Тип инициативы:</h2>
+      <div class="item">
+        <div>
+            <router-link :to="'/lawsuits'">
+              <h3 class="title-item blue">Cовместные иски</h3>
+            </router-link>
+        </div>
+      </div>
+      <div class="item item-blue">
+        <div>
+            <router-link :to="'/сlaims'">
+              <h3 class="title-item white">Претензии</h3>
+            </router-link>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+            <router-link :to="'/сooperatives'">
+              <h3 class="title-item blue">Кооперативы</h3>
+            </router-link>
+        </div>
+      </div>
+      <div class="item item-blue">
+        <div>
+            <router-link :to="'/hiring'">
+              <h3 class="title-item white">Совместный найм</h3>
+            </router-link>
+        </div>
+      </div>
+    </div>
 
     <!-- <div
         class="footer-div"
@@ -57,6 +75,47 @@ export default {
   <style src="vue-multiselect/dist/vue-multiselect.css"></style>
   
   <style scoped lang="scss">
+
+  
+  .items-container {
+    margin-top: 20px;
+    width: 100%;
+    //margin-bottom: $create-height+$input-height;
+  }
+  .item {
+    background: #F2F2F2;
+    padding: 10px 10px;
+    text-align: left;
+    color: #4072cb;
+    height: 60px;
+  }
+  .item-grey {
+    background: #F2F2F2;
+  }
+  .item-blue {
+    background: #839BC6;
+    color: #fff;
+  }
+  .blue {
+    color: #4072cb;
+  }
+  .white {
+    color: #fff
+  }
+  .image-item {
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+    margin-top: 5px;
+  }
+  .title-item {
+    font-weight: bold;
+  }
+  a {
+    text-decoration: none 
+  }
+
+
 .star-rating {
   float: left;
   margin-left: 3%;
@@ -72,7 +131,7 @@ export default {
 .item {
   float: left;
   width: 94%;
-  margin: 30px 3%;
+  // margin: 30px 3%;
 }
 
 .footer-div {

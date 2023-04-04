@@ -19,7 +19,7 @@
     <!-- <h2>Заявки</h2>
     <ApplicationsList :applications="applications" @open="open" /> -->
 
-    <MyСhat />
+    <RequestsList />
 
     <div class="footer-div">
       <router-link :to="$route.params.categories+'/create'">
@@ -77,8 +77,8 @@ import ApplicationsList from "@/components/ApplicationsList.vue";
 import ActionButton from "@/components/ActionButton.vue";
 import ModalDialog from "@/components/ModalDialog.vue";
 import ModalLayout from "@/components/ModalLayout.vue";
-import MyСhat from "@/components/MyСhat.vue";
 import StarRating from "vue-star-rating";
+import RequestsList from "@/components/RequestsList.vue";
 
 export default {
   name: "HomeView",
@@ -89,7 +89,7 @@ export default {
     ModalDialog,
     ModalLayout,
     OffersList,
-    MyСhat,
+    RequestsList,
     StarRating,
   },
   methods: {
