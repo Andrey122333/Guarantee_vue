@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h2>Выберите класс отдыха</h2>
+    <h2 class="margin-top">Выберите класс отдыха</h2>
     <div class="item-star">
       <span class="title-item">Колличество звёзд:</span>
       <StarRating class="star-rating" :star-size="30" v-model="rating" />
@@ -10,21 +10,21 @@
       <h2>Тип отдыха:</h2>
       <div class="item">
         <div>
-          <router-link :to="'/active_recreation'">
+          <router-link :to="{ name: 'home', params: { role: $route.params.role, categories: 'active_recreation' }}" >
             <h3 class="title-item-h blue">Активный отдых</h3>
           </router-link>
         </div>
       </div>
       <div class="item item-blue">
         <div>
-          <router-link :to="'/cafe'">
+          <router-link :to="{ name: 'home', params: { role: $route.params.role, categories: 'cafe' }}">
             <h3 class="title-item-h white">Кафе</h3>
           </router-link>
         </div>
       </div>
       <div class="item">
         <div>
-          <router-link :to="'/resorts'">
+          <router-link :to="{ name: 'home', params: { role: $route.params.role, categories: 'resorts' }}">
             <h3 class="title-item-h blue">Курорты</h3>
           </router-link>
         </div>
@@ -34,15 +34,12 @@
 </template>
   
   <script>
-// @ is an alias to /src
-import VueMultiselect from "vue-multiselect";
 import ActionButton from "@/components/ActionButton.vue";
 import StarRating from "vue-star-rating";
 
 export default {
   name: "HomeView",
   components: {
-    VueMultiselect,
     ActionButton,
     StarRating,
   },
@@ -57,14 +54,15 @@ export default {
 };
 </script>
   
-  
-  <style src="vue-multiselect/dist/vue-multiselect.css"></style>
-  
+    
   <style scoped lang="scss">
-  .title-item-h {
+.title-item-h {
   font-weight: bold;
   text-align: center;
   width: 100%;
+}
+.margin-top {
+  margin-top: 70px;
 }
 .items-container {
   margin-top: 20px;

@@ -1,31 +1,11 @@
 <template>
   <div>
     <div class="create-layout">
-      <h2>Создание заявки</h2>
-      <div class="item">
-        <span class="title-item">Название:</span>
-        <input class="create-input" type="text" />
-      </div>
-      <div class="item">
-        <span class="title-item">Страна:</span>
-        <VueMultiselect v-model="selected" :options="options"> </VueMultiselect>
-      </div>
-      <div class="item">
-        <span class="title-item">Город:</span>
-        <VueMultiselect v-model="selected" :options="options"> </VueMultiselect>
-      </div>
-      <div class="item">
-        <span class="title-item">Начальный взнос:</span>
-        <input class="create-input" type="text" />
-      </div>
-      <div class="item">
-        <span class="title-item">Тэги</span>
-        <VueMultiselect v-model="selected" :options="options"> </VueMultiselect>
-      </div>
-        <span class="title-item">Описание</span>
-        <textarea class="create-description"></textarea>
+
+<ApplicationUpdate />
+
         <div class="item">
-        <router-link :to="'/'+$route.params.categories">Список заявок</router-link>
+        <router-link :to="{ name: 'home', params: { role: $route.params.role, categories: $route.params.categories }}">Список заявок</router-link>
       </div>
     </div>
     <ActionButton @click="create()">Создать</ActionButton>
@@ -33,24 +13,26 @@
 </template>
   
   <script>
-import VueMultiselect from "vue-multiselect";
 import ActionButton from "@/components/ActionButton.vue";
+import ApplicationUpdate from "@/components/ApplicationUpdate.vue";
 
 export default {
   name: "SearchView",
   components: { 
-    VueMultiselect, ActionButton 
+    ApplicationUpdate, ActionButton 
   },
   data() {
     return {
       selected: null,
+      value: 0,
       options: ["list", "of", "options"],
     };
   },
   methods: {
     create() {
-      console.log(121331)
-      window.location.pathname = this.$route.params.categories;
+      //this.$router.push('register')
+      console.log(121331);
+      this.$router.push({ name: 'home', params: { role: this.$route.params.role, categories: this.$route.params.categories }})
     },
   }
 };
@@ -60,7 +42,8 @@ export default {
 
 <style scoped lang="scss">
 .create-layout {
-  margin: 5px 5vw;
+  margin: 70px 5vw;
+  margin-bottom: 100px;
 }
 .create-input {
   width: calc(50vw - 2px);

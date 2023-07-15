@@ -1,31 +1,31 @@
 <template>
   <div class="home">
     <div class="items-container">
-      <h2>Тип инициативы:</h2>
+      <!-- <h2>Тип инициативы:</h2> -->
       <div class="item">
         <div>
-            <router-link :to="'/lawsuits'">
+            <router-link  :to="{ name: 'home', params: { role: $route.params.role, categories: 'lawsuits' }}">
               <h3 class="title-item blue">Cовместные иски</h3>
             </router-link>
         </div>
       </div>
       <div class="item item-blue">
         <div>
-            <router-link :to="'/сlaims'">
+            <router-link  :to="{ name: 'home', params: { role: $route.params.role, categories: 'сlaims' }}">
               <h3 class="title-item white">Претензии</h3>
             </router-link>
         </div>
       </div>
       <div class="item">
         <div>
-            <router-link :to="'/сooperatives'">
+            <router-link  :to="{ name: 'home', params: { role: $route.params.role, categories: 'сooperatives' }}">
               <h3 class="title-item blue">Кооперативы</h3>
             </router-link>
         </div>
       </div>
       <div class="item item-blue">
         <div>
-            <router-link :to="'/hiring'">
+            <router-link :to="{ name: 'home', params: { role: $route.params.role, categories: 'hiring' }}">
               <h3 class="title-item white">Совместный найм</h3>
             </router-link>
         </div>

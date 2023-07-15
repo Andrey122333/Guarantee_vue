@@ -3,9 +3,17 @@
     <div class="modal-info">
       <details>
         <summary>
-          <router-link :to="'/' + $route.params.categories">
+          <!-- <router-link
+            :to="{
+              name: 'profile',
+              params: {
+                role: $route.params.role,
+                categories: $route.params.categories,
+              },
+            }"
+          >
             <div class="back"></div>
-          </router-link>
+          </router-link> -->
           <h2 class="modal-name">Название заявки {{ $route.params.id }}</h2>
           <p
             class="text-item"
@@ -15,38 +23,76 @@
             }}<span class="text-status">Идет голосование</span>
           </p>
           <InfoText :application="application" />
-          <Voting
+          <!-- <Voting
             :voting="application.voting"
             :participants_count="application.participants.length"
             v-if="
               application.voting.type != 'no' &&
               application.voting.type != 'executor'
             "
-          />
+          /> -->
 
-          <Contribution v-if="application.voting.type != 'amount'">
+          <Contribution v-if="application.voting.type != 'amount'  && application.status == 'Стоп-сумма'">
             Взнос: {{ application.contribution }}Р</Contribution
           >
           <Contribution
-            @click="
-              redirectToLink(
-                this.$route.params.categories + '/creatingvote/amount'
-              )
+            @click="StopSum()"
+            v-if="
+              $route.params.role == 'organizer' && application.status == 'Открыта'
             "
-            v-if="application.voting.type == 'no'"
+            >Стоп сумма</Contribution
+          >
+          <!-- <Contribution
+            @click="
+              $router.push({
+                name: 'creatingvote',
+                params: {
+                  role: $route.params.role,
+                  categories: $route.params.categories,
+                  id: application.id,
+                  type: 'amount',
+                },
+              })
+            "
+            v-if="
+              application.voting.type == 'no' &&
+              $route.params.role == 'organizer'
+            "
             >Начать голосование за сумму взноса</Contribution
           >
           <Contribution
             @click="
-              redirectToLink(
-                this.$route.params.categories + '/creatingvote/status'
-              )
+              $router.push({
+                name: 'creatingvote',
+                params: {
+                  role: $route.params.role,
+                  categories: $route.params.categories,
+                  id: application.id,
+                  type: 'status',
+                },
+              })
             "
-            v-if="application.voting.type == 'no'"
+            v-if="
+              application.voting.type == 'no' &&
+              $route.params.role == 'organizer'
+            "
             >Начать голосование за статус заявки</Contribution
+          > -->
+          <router-link
+            :to="{
+              name: 'chat',
+              params: {
+                role: $route.params.role,
+                categories: $route.params.categories,
+                id: $route.params.id,
+              },
+            }"
           >
+          <Contribution>Чат</Contribution>
+          </router-link>
         </summary>
-        <TagsList :tags="application.tags" />
+        <!-- <TagsList :tags="application.tags" /> -->
+        <Data />
         <Description :application="application" />
       </details>
     </div>
@@ -66,17 +112,29 @@
             style="background: #6b80a5; margin: 0px"
             v-if="application.voting.type == 'executor'"
           />
-          <GreyButton class="margin-top">Пригласить</GreyButton>
           <GreyButton
+            @click="Invitation()"
+            class="margin-top"
+            >Пригласить</GreyButton
+          >
+          <!-- <GreyButton
             class="margin-top"
             @click="
-              redirectToLink(
-                this.$route.params.categories + '/creatingvote/executor'
-              )
+              $router.push({
+                name: 'creatingvote',
+                params: {
+                  role: $route.params.role,
+                  categories: $route.params.categories,
+                  id: application.id,
+                  type: 'executor',
+                },
+              })
             "
-            v-if="application.voting.type == 'no'"
-            >Начать голосование за исполнителя</GreyButton
-          >
+            v-if="
+              application.voting.type == 'no' &&
+              $route.params.role == 'organizer'
+            "
+            >Начать голосование за исполнителя</GreyButton> -->
         </details>
       </div>
     </div>
@@ -89,7 +147,24 @@
       <EventsList :events="application.events" />
     </details>
   </div>
-  <ActionButton>Редактировать заявку</ActionButton>
+  <router-link
+            :to="{
+              name: 'edit',
+              params: {
+                role: $route.params.role,
+                categories: $route.params.categories,
+                id: $route.params.id,
+              },
+            }"
+          >
+  <ActionButton v-if="$route.params.role == 'organizer'">Редактировать заявку</ActionButton>
+  </router-link>
+  <ActionButton v-if="$route.params.role == 'user'">Выйти</ActionButton>
+
+
+      <Invitation v-if="MyInvitation" @close="close"/>
+      <StopSum v-if="MyStopsum" @close="close"/>
+
 </template>
 
 <script>
@@ -97,9 +172,14 @@ import ActionButton from "@/components/ActionButton.vue";
 import InfoText from "@/components/Application/InfoText.vue";
 import Contribution from "@/components/Application/Contribution.vue";
 import TagsList from "@/components/Application/TagsList.vue";
+import Data from "@/components/Application/Data.vue";
 import Description from "@/components/Application/Description.vue";
 import UsersList from "@/components/Application/UsersList.vue";
 import Voting from "@/components/Application/Voting.vue";
+
+import ModalLayout from "@/components/ModalLayout.vue";
+import StopSum from "@/components/StopSum.vue";
+import Invitation from "@/components/Invitation.vue";
 
 import GreyButton from "@/components/UI/GreyButton.vue";
 import EventsList from "@/components/EventsList.vue";
@@ -111,21 +191,26 @@ export default {
     InfoText,
     Contribution,
     TagsList,
+    Data,
     Description,
     UsersList,
     GreyButton,
     EventsList,
     Voting,
+    ModalLayout,
+    StopSum,
+    Invitation,
   },
   data() {
     return {
-      window: false,
+      MyStopsum: false,
+      MyInvitation: false,
       application: {},
       all_application: [
         {
           id: 2,
           name: "Заявка 1",
-          status: "Стоп-сумма",
+          status: "Открыта",
           city: "Москва",
           date: "15.09.2022",
           contribution: 1100,
@@ -155,7 +240,7 @@ export default {
         {
           id: 3,
           name: "Заявка 1",
-          status: "Стоп-сумма",
+          status: "Открыта",
           city: "Москва",
           date: "15.09.2022",
           contribution: 1100,
@@ -186,10 +271,22 @@ export default {
     };
   },
   beforeMount() {
-    this.application = this.all_application[this.$route.params.id-2]; //$route.params.id
+    this.application = this.all_application[this.$route.params.id - 2]; //$route.params.id
     //console.log(this.$route.params.id-2);
   },
   methods: {
+    StopSum() {
+      this.MyStopsum = true;
+      console.log(1);
+    },
+    Invitation() {
+      this.MyInvitation = true;
+      console.log(0);
+    },
+    close() {
+      this.MyInvitation = false;
+      this.MyStopsum = false;
+    },
     redirectToLink(link) {
       window.location.pathname = link;
     },
@@ -200,10 +297,10 @@ export default {
 <style  scoped  lang="scss">
 .back {
   position: absolute;
-    border: 3vw solid transparent;
-    border-right: 6vw solid #2f406c;
-    top: 30px;
-    left: 5px;
+  border: 3vw solid transparent;
+  border-right: 6vw solid #2f406c;
+  top: 30px;
+  left: 5px;
 }
 $create-height: 70px;
 .modal-name {

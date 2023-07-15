@@ -16,23 +16,21 @@
           <input class="input-text" type="text" placeholder="Поиск" />
         </div> -->
   
-      <h2>Приглашения</h2>
-      <ApplicationsList :applications="invitation_applications" @open="open" />
+      <h2 v-if="$route.params.role=='user'">Приглашения</h2>
+      <ApplicationsList v-if="$route.params.role=='user'" :applications="invitation_applications" @open="open" />
       <h2>Мои заявки</h2>
       <ApplicationsList :applications="my_applications" @open="open" />
   
       <div class="footer-div">
-        <router-link :to="$route.params.categories+'/create'">
               <button class="button">
                 Поиск
               </button>
-              </router-link>
-              <router-link :to="$route.params.categories+'/create'">
+              <router-link :to="{ name: 'create', params: { role: $route.params.role, categories: $route.params.categories }}">
               <button class="button-center button">
                 Создать заявку
               </button>
               </router-link>
-              <router-link :to="$route.params.categories">
+              <router-link :to="{ name: 'home', params: { role: $route.params.role, categories: $route.params.categories }}">
               <button class="button">
                 Назад
               </button>
@@ -60,6 +58,7 @@
   import ModalDialog from "@/components/ModalDialog.vue";
   import ModalLayout from "@/components/ModalLayout.vue";
   import StarRating from "vue-star-rating";
+import { defineAsyncComponent } from "vue";
   
   export default {
     name: "HomeView",
@@ -76,8 +75,8 @@
       open(application) {
         console.log(application);
         if (application.type == "my_application") {
-          window.location.href =
-            this.$route.params.categories + "/application/" + application.id;
+          this.$router.push({ name: 'application', params: { role: this.$route.params.role , categories: this.$route.params.categories, id: application.id } })
+          // window.location.href =this.$route.params.role + "/" + this.$route.params.categories + "/application/" + application.id;
         } else {
           this.application = application;
           this.window = true;
@@ -94,24 +93,6 @@
         options: [1, 2, 3, 4, 5],
         vacation: ["active_recreation", "cafe", "resorts"],
         window: false,
-        offers: [
-          {
-            id: 2,
-            type: "my_application",
-            name: "Товар 1",
-            contribution: 1100,
-            description:
-              "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
-          },
-          {
-            id: 3,
-            type: "my_application",
-            name: "Товар 2",
-            contribution: 1100,
-            description:
-              "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
-          },
-        ],
         application: {},
         invitation_applications: [
           {

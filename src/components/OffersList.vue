@@ -7,7 +7,7 @@
       <div>
         <p class="title-item text-item">{{offer.name}}
           <span  class="text-status">{{offer.contribution}}Р</span>
-        
+          <span  class="text-status">{{offer.date}}</span>
         </p>
 
         <p class="text-item">
@@ -29,6 +29,8 @@
   };
   </script>
   
+  <style src="vue-multiselect/dist/vue-multiselect.css"></style>
+
   <style scoped lang="scss">
   
   $create-height: 70px;

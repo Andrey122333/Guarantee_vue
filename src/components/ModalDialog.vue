@@ -8,7 +8,8 @@
       <UsersList :participants="application.who_invited" v-if="application.type =='invitation_application'"/>
       <InfoText :application="application"/>
       <Contribution style="width: 80vw;"> Взнос: {{ application.contribution }}Р</Contribution>
-      <TagsList :tags="application.tags" />
+      <!-- <TagsList :tags="application.tags" /> -->
+      <Data />
       <Description :application="application"/>
     </div>
     <Users :participants="application.participants" />
@@ -19,6 +20,7 @@
 import InfoText from "@/components/Application/InfoText.vue";
 import Contribution from "@/components/Application/Contribution.vue";
 import TagsList from "@/components/Application/TagsList.vue";
+import Data from "@/components/Application/Data.vue";
 import Description from "@/components/Application/Description.vue";
 import Users from "@/components/Application/Users.vue";
 import UsersList from "@/components/Application/UsersList.vue";
@@ -31,7 +33,8 @@ export default {
     TagsList,
     Description,
     Users,
-    UsersList
+    UsersList,
+    Data
   },
   props: {
     application: {

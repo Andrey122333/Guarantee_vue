@@ -138,7 +138,7 @@ export default {
   
   <style scoped lang="scss">
 .create-layout {
-  margin: 5px 5vw;
+    margin: 70px 5vw;
 }
 .create-input {
   width: calc(50vw - 2px);

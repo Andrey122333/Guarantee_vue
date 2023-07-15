@@ -1,6 +1,16 @@
 <template>
   <div class="home">
-    <OffersList :offers="offers" />
+    <div class="left-offers">
+      «
+    </div>
+    <div class="right-offers">
+      »
+    </div>
+    <OffersList @open="open" :offers="offers" />
+
+    <div v-if="Myinput" class="input">
+        <input class="input-text" type="text" placeholder="Поиск" />
+      </div>
 
     <!-- <div v-if="vacation.includes($route.params.categories)" class="item">
       <span class="title-item">Колличество звёзд:</span>
@@ -22,17 +32,20 @@
     <RequestsList />
 
     <div class="footer-div">
-      <router-link :to="$route.params.categories+'/create'">
-            <button class="button">
+            <button class="button" @click="openInput()">
               Поиск
             </button>
-            </router-link>
-            <router-link :to="$route.params.categories+'/create'">
+            <router-link v-if="$route.params.role=='organizer'" :to="{ name: 'create', params: { role: $route.params.role, categories: $route.params.categories }}">
             <button class="button-center button">
               Создать заявку
             </button>
             </router-link>
-            <router-link :to="$route.params.categories+'/profile'">
+            <router-link v-if="$route.params.role=='user'" :to="{ name: 'createrequest', params: { role: $route.params.role, categories: $route.params.categories }}">
+            <button class="button-center button">
+              Создать запрос
+            </button>
+            </router-link>
+            <router-link :to="{ name: 'profile', params: { role: $route.params.role, categories: $route.params.categories }}">
             <button class="button">
               Профиль
             </button>
@@ -93,23 +106,19 @@ export default {
     StarRating,
   },
   methods: {
-    open(application) {
-      console.log(application);
-      if (application.type == "my_application") {
-        window.location.href =
-          this.$route.params.categories + "/application/" + application.id;
-      } else {
-        this.application = application;
-        this.window = true;
-      }
+    open() {
     },
     close() {
       this.window = false;
     },
+    openInput() {
+      this.Myinput = !this.Myinput;
+    }
   },
   data() {
     return {
       rating: 5,
+      Myinput: false,
       selected: null,
       options: [1, 2, 3, 4, 5],
       vacation: ["active_recreation", "cafe", "resorts"],
@@ -117,17 +126,19 @@ export default {
       offers: [
         {
           id: 2,
-          type: "my_application",
+          type: "application",
           name: "Товар 1",
           contribution: 1100,
+          date: "17.04.2023",
           description:
             "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
         },
         {
           id: 3,
-          type: "my_application",
+          type: "application",
           name: "Товар 2",
           contribution: 1100,
+          date: "15.04.2023",
           description:
             "Первые несколько строк описания. Первые несколько строк описания....Первые несколько строк описания....",
         },
@@ -252,7 +263,6 @@ export default {
             },
           ],
         },
-
         {
           id: 6,
           type: "application",
@@ -301,6 +311,30 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.css"></style>
 
 <style scoped lang="scss">
+.left-offers {
+  position: absolute;
+    font-size: 70px;
+    left: 0vw;
+    color: #000;
+    opacity: 0.1;
+}
+.right-offers {
+  position: absolute;
+    right: 0vw;
+    font-size: 70px;
+    opacity: 0.3;
+    color: #000;
+    opacity: 0.1;
+}
+.input {
+  height: 70px;
+  background: #fff;
+}
+.input-text {
+  height: 30px;
+  margin-top: 20px;
+  width: 80%;
+}
 .star-rating {
   float: left;
   margin-left: 3%;

@@ -41,12 +41,11 @@
 
   <div class="chat-input">      
       <form>
+        <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">density_medium</i></button>
         <input type="text" id="chat-input" placeholder="Send a message..."/>
       <button type="submit" class="chat-submit" id="chat-submit"><i class="material-icons">send</i></button>
       </form>      
     </div>
-
-
 </section>
   </template>
   
@@ -130,7 +129,7 @@ img {
 #chat-input {
   float: left;
   background: #f4f7f9;
-  width: 90%; 
+  width: 80%; 
   height:47px;  
   padding-top:10px;
   padding-right:50px;
